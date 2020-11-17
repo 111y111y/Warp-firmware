@@ -71,6 +71,7 @@
 #	include "devBME680.h"
 #	include "devCCS811.h"
 #	include "devAMG8834.h"
+#       include "devSSD1331.h"
 //#	include "devMAX11300.h"
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
@@ -1353,10 +1354,9 @@ main(void)
 	 *	Notreached
 	 */
 #endif
-
+//devSSD1331init();
 	while (1)
-	{
-		/*
+	{		/*
 		 *	Do not, e.g., lowPowerPinStates() on each iteration, because we actually
 		 *	want to use menu to progressiveley change the machine state with various
 		 *	commands.
