@@ -1360,19 +1360,22 @@ main(void)
 	uint8_t		current_register[1] = {0x04};
 
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
-	uint16_t		ina219_calibration_setting = 0;
-	SEGGER_RTT_WriteString(0, "Enter INA219 calibration setting in hex (e.g. 3470): ");
-	ina219_calibration_setting = readHexByte() << 8;
-	ina219_calibration_setting |= readHexByte();
-	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", ina219_calibration_setting);
+	
+	
+	uint16_t		user_input = 0; // Initialise user input variable
+	SEGGER_RTT_WriteString(0, "Enter calibration value: ");
+	user_input = readHexByte() << 8; //Dodgy taking input into hex values of 4 digits
+	user_input |= readHexByte();
+	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", user_input);
+	
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	
 	
 
-	uint8_t			payload[2];
-	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
-	payload[0] = (uint8_t) ((ina219_calibration_setting&0xFF00) >> 8);
-	payload[1] = (uint8_t) (ina219_calibration_setting&0x00FF);
+	uint8_t			calibration_value[2];	
+	//Convert the 2 byte input to 2 separate inputs to write to the Sensor
+	calibration_value[0] = (uint8_t) ((user_input&0xFF00) >> 8);
+	calibration_value[1] = (uint8_t) (user_input&0x00FF);
 	
 	enableI2Cpins(menuI2cPullupValue);
 	
@@ -1382,7 +1385,7 @@ main(void)
 							&slave,
 							(uint8_t *) calibration_register,
 							1,
-							(uint8_t *) payload,
+							(uint8_t *) calibration_value,
 							2,
 							gWarpI2cTimeoutMilliseconds);
 
