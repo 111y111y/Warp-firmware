@@ -1367,19 +1367,12 @@ main(void)
 	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", ina219_calibration_setting);
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	
-	uint8_t			calibration_value[2];
-	
-	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
-	calibration_value[0] = (uint8_t) ((user_input&0xFF00) >> 8);
-	calibration_value[1] = (uint8_t) (user_input&0x00FF);
 	
 
-	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	
 	uint8_t			payload[2];
 	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
-	payload[0] = (uint8_t) ((calibration_value&0xFF00) >> 8);
-	payload[1] = (uint8_t) (calibration_value&0x00FF);
+	payload[0] = (uint8_t) ((ina219_calibration_settin&0xFF00) >> 8);
+	payload[1] = (uint8_t) (ina219_calibration_settin&0x00FF);
 	
 	enableI2Cpins(menuI2cPullupValue);
 	
