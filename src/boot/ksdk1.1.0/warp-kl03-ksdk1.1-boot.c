@@ -1,28 +1,21 @@
 /*
 	Authored 2016-2018. Phillip Stanley-Marbell.
-
 	Additional contributions, 2018 onwards: Jan Heck, Chatura Samarakoon, Youchao Wang, Sam Willis.
-
 	All rights reserved.
-
 	Redistribution and use in source and binary forms, with or without
 	modification, are permitted provided that the following conditions
 	are met:
-
 	*	Redistributions of source code must retain the above
 		copyright notice, this list of conditions and the following
 		disclaimer.
-
 	*	Redistributions in binary form must reproduce the above
 		copyright notice, this list of conditions and the following
 		disclaimer in the documentation and/or other materials
 		provided with the distribution.
-
 	*	Neither the name of the author nor the names of its
 		contributors may be used to endorse or promote products
 		derived from this software without specific prior written
 		permission.
-
 	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 	"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 	LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -71,7 +64,7 @@
 #	include "devBME680.h"
 #	include "devCCS811.h"
 #	include "devAMG8834.h"
-#       include "devSSD1331.h"
+#	include "devSSD1331.h"
 //#	include "devMAX11300.h"
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
@@ -980,7 +973,6 @@ dumpProcessorState(void)
 {
 /*
 	uint32_t	cpuClockFrequency;
-
 	CLOCK_SYS_GetFreq(kCoreClock, &cpuClockFrequency);
 #ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
 	SEGGER_RTT_printf(0, "\r\n\n\tCPU @ %u KHz\n", (cpuClockFrequency / 1000));
@@ -1354,9 +1346,10 @@ main(void)
 	 *	Notreached
 	 */
 #endif
-//devSSD1331init();
-	
-i2c_status_t	status;
+
+	devSSD1331init();
+
+	i2c_status_t	status;
 	i2c_device_t	slave = {
 				.address = 0x40,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
@@ -1375,19 +1368,17 @@ i2c_status_t	status;
 	if (status != kStatus_I2C_Success){
 		SEGGER_RTT_WriteString(0, "Failed to read INA219");
 	} else {
-		SEGGER_RTT_printf(0, "Register value: %d%d", 1, 2);/*i2c_buffer[0], i2c_buffer[1]);*/
+		SEGGER_RTT_printf(0, "Register value: 0x%02x 0x%02x", i2c_buffer[0], i2c_buffer[1]);
 	}
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	
-	
-	
-SEGGER_RTT_WriteString(0, "Shove off Warp\n"); //Print some words
-SEGGER_RTT_printf(0, "The number of the beast is %d", 666); //Print a number
-	
-	
-	
+
+
+	SEGGER_RTT_WriteString(0, "Hello world");
+	//SEGGER_RTT_printf(0, "The number %d", 1);
+
 	while (1)
-	{		/*
+	{
+		/*
 		 *	Do not, e.g., lowPowerPinStates() on each iteration, because we actually
 		 *	want to use menu to progressiveley change the machine state with various
 		 *	commands.
