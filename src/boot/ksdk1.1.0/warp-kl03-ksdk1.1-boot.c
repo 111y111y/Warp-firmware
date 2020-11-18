@@ -1406,7 +1406,9 @@ main(void)
 	}
 
 
-
+int i;
+for (i = 1; i < 100; ++i)
+{
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
 							(uint8_t *) current_register,
@@ -1422,7 +1424,8 @@ main(void)
 		SEGGER_RTT_printf(0, "Current register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
-
+OSA_TimeDelay(1000);
+}
 	OSA_TimeDelay(1000);
 
 
