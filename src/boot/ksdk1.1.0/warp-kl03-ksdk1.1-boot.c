@@ -1360,7 +1360,7 @@ main(void)
 	
 	
 	
-SEGGER_RTT_WriteString(0, "Shove off Warp/n"); //Print some words
+SEGGER_RTT_WriteString(0, "Shove off Warp\n"); //Print some words
 SEGGER_RTT_printf(0, "The number of the beast is %d", 666); //Print a number
 	
 	
