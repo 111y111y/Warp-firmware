@@ -1355,6 +1355,16 @@ main(void)
 	 */
 #endif
 //devSSD1331init();
+	
+	
+	
+	
+	
+SEGGER_RTT_WriteString(0, "Shove off Warp"); //Print some words
+SEGGER_RTT_printf(0, "The number of the beast %d", 666); //Print a number
+	
+	
+	
 	while (1)
 	{		/*
 		 *	Do not, e.g., lowPowerPinStates() on each iteration, because we actually
