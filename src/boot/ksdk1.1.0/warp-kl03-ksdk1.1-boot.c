@@ -1359,9 +1359,22 @@ main(void)
 	uint8_t		calibration_register[1] = {0x05};
 	uint8_t		current_register[1] = {0x04};
 
-	uint8_t		calibration_value[2] = {0x34, 0x6D};
+	\\uint8_t		calibration_value[2] = {0x34, 0x6D};
+	uint16_t 	user_input = 0;
+	
+	SEGGER_RTT_WriteString(0, "Enter hex calibration setting: ");
+	user_input = readHexByte() << 8;
+	user_input = readHexByte();
+	SEGGER_RTT_WriteString(0, "\nEntered 0x%04x\n");
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	
+	uint8_t			calibration_value[2];
+	
+	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
+	calibration_value[0] = (uint8_t) ((user_input&0xFF00) >> 8);
+	calibration_value[1] = (uint8_t) (user_input&0x00FF);
+	
 
-	SEGGER_RTT_WriteString(0, "Before I2C\n");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
@@ -1392,14 +1405,13 @@ main(void)
 							2,
 							gWarpI2cTimeoutMilliseconds);
 
-	SEGGER_RTT_WriteString(0, "Finish I2C\n");
+	
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	if (status != kStatus_I2C_Success){
 		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else {
-		SEGGER_RTT_WriteString(0, "Testing testing 1,2, 3 \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
