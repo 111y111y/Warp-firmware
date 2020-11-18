@@ -1365,7 +1365,7 @@ main(void)
 	SEGGER_RTT_WriteString(0, "Enter hex calibration setting: ");
 	user_input = readHexByte() << 8;
 	user_input = readHexByte();
-	SEGGER_RTT_WriteString(0, "\nEntered 0x%04x\n");
+	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", user_input);
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	
 	uint8_t			calibration_value[2];
