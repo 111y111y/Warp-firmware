@@ -1360,12 +1360,11 @@ main(void)
 	uint8_t		current_register[1] = {0x04};
 
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
-	uint16_t 	user_input = 0;
-	
-	SEGGER_RTT_WriteString(0, "Enter hex calibration setting: ");
-	user_input = readHexByte() << 8;
-	user_input = readHexByte();
-	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", user_input);
+	uint16_t		ina219_calibration_setting = 0;
+	SEGGER_RTT_WriteString(0, "Enter INA219 calibration setting in hex (e.g. 3470): ");
+	ina219_calibration_setting = readHexByte() << 8;
+	ina219_calibration_setting |= readHexByte();
+	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", ina219_calibration_setting);
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	
 	uint8_t			calibration_value[2];
@@ -1376,14 +1375,21 @@ main(void)
 	
 
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-
+	
+	uint8_t			payload[2];
+	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
+	payload[0] = (uint8_t) ((calibration_value&0xFF00) >> 8);
+	payload[1] = (uint8_t) (calibration_value&0x00FF);
+	
 	enableI2Cpins(menuI2cPullupValue);
+	
+
 
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							(uint8_t *) calibration_register,
 							1,
-							(uint8_t *) calibration_value,
+							(uint8_t *) payload,
 							2,
 							gWarpI2cTimeoutMilliseconds);
 
