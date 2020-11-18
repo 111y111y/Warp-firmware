@@ -1359,7 +1359,7 @@ main(void)
 	uint8_t		calibration_register[1] = {0x05};
 	uint8_t		current_register[1] = {0x04};
 
-	uint8_t		calibration_value[2] = {0x01, 0x9A};
+	uint8_t		calibration_value[2] = {0x34, 0x6D};
 
 	SEGGER_RTT_WriteString(0, "Before I2C\n");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
@@ -1421,7 +1421,7 @@ for (i = 1; i < 100; ++i)
 		SEGGER_RTT_WriteString(0, "Failed to read from  current register :(");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
-		SEGGER_RTT_printf(0, "Current register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
+		SEGGER_RTT_printf(0, "\nCurrent register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 OSA_TimeDelay(1000);
