@@ -1359,7 +1359,7 @@ main(void)
 	uint8_t		calibration_register[1] = {0x05};
 	uint8_t		current_register[1] = {0x04};
 
-	\\uint8_t		calibration_value[2] = {0x34, 0x6D};
+	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 	uint16_t 	user_input = 0;
 	
 	SEGGER_RTT_WriteString(0, "Enter hex calibration setting: ");
