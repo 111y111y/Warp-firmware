@@ -1356,24 +1356,79 @@ main(void)
 				};
 
 	uint8_t		i2c_buffer[2];
+	uint8_t		calibration_register[1] = {0x05};
+	uint8_t		current_register[1] = {0x04};
+
+	uint8_t		calibration_value[2] = {0x01, 0x9A};
+
+	SEGGER_RTT_WriteString(0, "Before I2C\n");
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	enableI2Cpins(menuI2cPullupValue);
+
+	status = I2C_DRV_MasterSendDataBlocking(0,
+							&slave,
+							(uint8_t *) calibration_register,
+							1,
+							(uint8_t *) calibration_value,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to write calibration :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_WriteString(0, "Calibration worked!!!!!!\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	}
+
+
 
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
-							0x00 /*Configuration register address*/,
+							(uint8_t *) calibration_register,
 							1,
 							(uint8_t *)i2c_buffer,
 							2,
 							gWarpI2cTimeoutMilliseconds);
 
-	if (status != kStatus_I2C_Success){
-		SEGGER_RTT_WriteString(0, "Failed to read INA219");
-	} else {
-		SEGGER_RTT_printf(0, "Register value: 0x%02x 0x%02x", i2c_buffer[0], i2c_buffer[1]);
-	}
+	SEGGER_RTT_WriteString(0, "Finish I2C\n");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		SEGGER_RTT_WriteString(0, "Testing testing 1,2, 3 \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	}
 
-	SEGGER_RTT_WriteString(0, "Hello world");
+
+
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) current_register,
+							1,
+							(uint8_t *) i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from  current register :(");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_printf(0, "Current register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	}
+
+	OSA_TimeDelay(1000);
+
+
+	disableI2Cpins();
+
+	SEGGER_RTT_WriteString(0, "\nShove off Warp!!!\n");
 	//SEGGER_RTT_printf(0, "The number %d", 1);
 
 	while (1)
