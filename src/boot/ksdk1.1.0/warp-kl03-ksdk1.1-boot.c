@@ -1371,8 +1371,8 @@ main(void)
 
 	uint8_t			payload[2];
 	/* Divide 2 byte calibration_value to 2x 1 byte to send over I2C*/
-	payload[0] = (uint8_t) ((ina219_calibration_settin&0xFF00) >> 8);
-	payload[1] = (uint8_t) (ina219_calibration_settin&0x00FF);
+	payload[0] = (uint8_t) ((ina219_calibration_setting&0xFF00) >> 8);
+	payload[1] = (uint8_t) (ina219_calibration_setting&0x00FF);
 	
 	enableI2Cpins(menuI2cPullupValue);
 	
