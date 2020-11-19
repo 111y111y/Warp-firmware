@@ -1361,12 +1361,13 @@ main(void)
 	uint8_t		i2c_buffer[2];
 	uint8_t		calibration_register[1] = {0x05};
 	uint8_t		current_register[1] = {0x04};
+	uint8_t		voltage_register[1] = {0x01};
 	uint16_t	cal_reg_read = 0;
 	uint16_t	cur_reg_read = 0;
 	uint16_t	LSB_current = 0010;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 int i;
-for (i = 1; i < 100; ++i){
+for (i = 1; i < 2; ++i){
 	//Take input for calibration value
 	uint16_t		user_input = 0; // Initialise user input variable
 	SEGGER_RTT_WriteString(0, "Enter calibration value: ");
@@ -1469,6 +1470,88 @@ OSA_TimeDelay(1000);
 
 	while (1)
 	{
+		
+	while (1){
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) voltage_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Voltage Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000)
+		
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) calibration_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000)	
+		
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) current_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Current Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000)	
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		/*
 		 *	Do not, e.g., lowPowerPinStates() on each iteration, because we actually
 		 *	want to use menu to progressiveley change the machine state with various
