@@ -1364,7 +1364,7 @@ main(void)
 	uint8_t		voltage_register[1] = {0x01};
 	uint16_t	cal_reg_read = 0;
 	uint16_t	cur_reg_read = 0;
-	int		LSB_current = 13;
+	float		LSB_current = 12.5;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 
 	//Take input for calibration value
@@ -1480,8 +1480,8 @@ for (i = 1; i < readings; ++i){
 	//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	//SEGGER_RTT_printf(0, "\nCur  reg read : %d uA\n", cur_reg_read);
 	//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	uint32_t	Microamps = LSB_current*cur_reg_read;
-	SEGGER_RTT_printf(0, "\nCurrent: %d uA\n", Microamps);
+	float	Microamps = LSB_current*cur_reg_read;
+	SEGGER_RTT_printf(0, "\nCurrent: %1f uA", Microamps);
 	OSA_TimeDelay(200);
 }
 
