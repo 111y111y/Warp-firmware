@@ -1346,22 +1346,27 @@ main(void)
 	 *	Notreached
 	 */
 #endif
-
+//Coursework 2-4 begines here
+	
+	//Make the screen turn on
 	devSSD1331init();
 
+	//I2C address definitions
 	i2c_status_t	status;
 	i2c_device_t	slave = {
 				.address = 0x40,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
-
+	//Register + variables definitions
 	uint8_t		i2c_buffer[2];
 	uint8_t		calibration_register[1] = {0x05};
 	uint8_t		current_register[1] = {0x04};
-
+	uint16_t	cal_reg_read = 0;
+	uint16_t	cur_reg_read = 0;
+	uint16_t	LSB_current = 0;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 	
-	
+	//Take input for calibration value
 	uint16_t		user_input = 0; // Initialise user input variable
 	SEGGER_RTT_WriteString(0, "Enter calibration value: ");
 	user_input = readHexByte() << 8; //Dodgy taking input into hex values of 4 digits
@@ -1380,7 +1385,7 @@ main(void)
 	enableI2Cpins(menuI2cPullupValue);
 	
 
-
+	//Write to the calibration register
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							(uint8_t *) calibration_register,
@@ -1398,7 +1403,7 @@ main(void)
 	}
 
 
-
+	//Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
 							(uint8_t *) calibration_register,
@@ -1416,13 +1421,18 @@ main(void)
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+		
+		cal_reg_read |= (i2c_buffer[0] <<8); //Variable definition
+		cal_reg_read = i2c_buffer[1];
+		
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 
-
-int i;
-for (i = 1; i < 100; ++i)
-{
+//Loop readings
+//int i;
+//for (i = 1; i < 100; ++i)
+//{
+	//Read from current register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
 							(uint8_t *) current_register,
@@ -1432,14 +1442,21 @@ for (i = 1; i < 100; ++i)
 							gWarpI2cTimeoutMilliseconds);
 
 	if (status != kStatus_I2C_Success){
-		SEGGER_RTT_WriteString(0, "Failed to read from  current register :(");
+		SEGGER_RTT_WriteString(0, "Failed to read from  current register :( ");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		SEGGER_RTT_printf(0, "\nCurrent register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
+		cur_reg_read = i2c_buffer[1]; //Current register variable
+		cur_reg_read |= (i2c_buffer[0] <<8);		
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		
 	}
 OSA_TimeDelay(1000);
-}
+//}
+	//Print current in legit form
+	LSB_current = 0.04096*1000/(cal_reg_read*0.1);
+	SEGGER_RTT_WriteString(0, "You're here Adam");
+	SEGGER_RTT_printf(0, LSB_current*cur_reg_read);
 	OSA_TimeDelay(1000);
 
 
