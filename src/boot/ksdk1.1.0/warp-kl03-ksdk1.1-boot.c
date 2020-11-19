@@ -1489,7 +1489,7 @@ OSA_TimeDelay(1000);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Voltage Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
-	OSA_TimeDelay(1000)
+	OSA_TimeDelay(1000);
 		
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
@@ -1508,7 +1508,7 @@ OSA_TimeDelay(1000);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
-	OSA_TimeDelay(1000)	
+	OSA_TimeDelay(1000)	;
 		
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
@@ -1527,7 +1527,7 @@ OSA_TimeDelay(1000);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Current Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
-	OSA_TimeDelay(1000)	
+	OSA_TimeDelay(1000)	;
 	}
 		
 		
