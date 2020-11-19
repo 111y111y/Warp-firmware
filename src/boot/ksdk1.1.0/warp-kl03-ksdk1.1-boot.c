@@ -1455,8 +1455,10 @@ OSA_TimeDelay(1000);
 //}
 	//Print current in legit form
 	LSB_current = 0.04096*1000/(cal_reg_read*0.1);
-	SEGGER_RTT_WriteString(0, "You're here Adam");
-	SEGGER_RTT_printf(0, LSB_current*cur_reg_read);
+	SEGGER_RTT_WriteString(0, "\nYou're here Adam");
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	uint32_t	Milliamps = LSB_current*cur_reg_read;
+	SEGGER_RTT_printf(0, "Current: %lu mA\n", Milliamps);
 	OSA_TimeDelay(1000);
 
 
