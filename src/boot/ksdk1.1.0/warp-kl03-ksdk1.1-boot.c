@@ -1365,7 +1365,7 @@ main(void)
 	uint16_t	cur_reg_read = 0;
 	uint16_t	LSB_current = 0;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
-int i
+int i;
 for (i = 1; i < 100; ++i){
 	//Take input for calibration value
 	uint16_t		user_input = 0; // Initialise user input variable
