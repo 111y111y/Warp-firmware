@@ -1448,8 +1448,8 @@ for (i = 1; i < 100; ++i){
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		SEGGER_RTT_printf(0, "\nCurrent register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
-		cur_reg_read = i2c_buffer[1]; //Current register variable
-		cur_reg_read |= (i2c_buffer[0] <<8);		
+		cur_reg_read = i2c_buffer[1] | (i2c_buffer[0] <<8) ; //Current register variable
+		//cur_reg_read |= (i2c_buffer[0] <<8);		
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		
 	}
