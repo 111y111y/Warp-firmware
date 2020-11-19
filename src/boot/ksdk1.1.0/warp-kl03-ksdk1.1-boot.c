@@ -1402,7 +1402,7 @@ main(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 
-
+for (i = 1; i < 100; ++i){
 	//Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
@@ -1460,7 +1460,7 @@ OSA_TimeDelay(1000);
 	uint32_t	Milliamps = LSB_current*cur_reg_read;
 	SEGGER_RTT_printf(0, "Current: %lu mA\n", Milliamps);
 	OSA_TimeDelay(1000);
-
+}
 
 	disableI2Cpins();
 
