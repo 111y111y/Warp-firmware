@@ -1367,7 +1367,7 @@ main(void)
 	uint16_t	LSB_current = 0010;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 int i;
-for (i = 1; i < 2; ++i){
+for (i = 1; i < 100; ++i){
 	//Take input for calibration value
 	uint16_t		user_input = 0; // Initialise user input variable
 	SEGGER_RTT_WriteString(0, "Enter calibration value: ");
@@ -1455,11 +1455,33 @@ for (i = 1; i < 2; ++i){
 	}
 OSA_TimeDelay(1000);
 //}
+	//Voltage register
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) volatage_register,
+							1,
+							(uint8_t *) i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from  Voltage register :( ");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_printf(0, "\nVoltage register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
+		cur_reg_read = i2c_buffer[1]; //Current register variable
+		cur_reg_read |= (i2c_buffer[0] <<8);		
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		
+	}
+OSA_TimeDelay(1000);
+	
+	
 	//Print current in legit form
 	//SEGGER_RTT_WriteString(0, "\nYou're here Adam");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	uint32_t	Microamps = LSB_current*cur_reg_read;
-	SEGGER_RTT_printf(0, "Current: %lu uA\n", Microamps);
+	SEGGER_RTT_printf(0, "\nCurrent: %lu uA\n", Microamps);
 	OSA_TimeDelay(1000);
 }
 
@@ -1470,7 +1492,7 @@ OSA_TimeDelay(1000);
 
 	while (1)
 	{
-		
+	/*	
 	while (1){
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
@@ -1531,7 +1553,7 @@ OSA_TimeDelay(1000);
 	}
 	}
 		
-		
+		*/
 		
 		
 		
