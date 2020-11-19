@@ -1469,8 +1469,8 @@ OSA_TimeDelay(1000);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		SEGGER_RTT_printf(0, "\nVoltage register: 0x%02x%02x", i2c_buffer[0], i2c_buffer[1]);
-		cur_reg_read = i2c_buffer[1]; //Current register variable
-		cur_reg_read |= (i2c_buffer[0] <<8);		
+		//cur_reg_read = i2c_buffer[1]; //Current register variable
+		//cur_reg_read |= (i2c_buffer[0] <<8);		
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		
 	}
