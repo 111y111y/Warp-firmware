@@ -1458,7 +1458,7 @@ OSA_TimeDelay(1000);
 	//Voltage register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
-							(uint8_t *) volatage_register,
+							(uint8_t *) voltage_register,
 							1,
 							(uint8_t *) i2c_buffer,
 							2,
