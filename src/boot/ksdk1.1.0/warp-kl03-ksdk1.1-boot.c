@@ -1363,7 +1363,7 @@ main(void)
 	uint8_t		current_register[1] = {0x04};
 	uint16_t	cal_reg_read = 0;
 	uint16_t	cur_reg_read = 0;
-	uint16_t	LSB_current = 0100;
+	uint16_t	LSB_current = 0010;
 	//uint8_t		calibration_value[2] = {0x34, 0x6D};
 int i;
 for (i = 1; i < 100; ++i){
@@ -1455,7 +1455,7 @@ for (i = 1; i < 100; ++i){
 OSA_TimeDelay(1000);
 //}
 	//Print current in legit form
-	SEGGER_RTT_WriteString(0, "\nYou're here Adam");
+	//SEGGER_RTT_WriteString(0, "\nYou're here Adam");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	uint32_t	Microamps = LSB_current*cur_reg_read;
 	SEGGER_RTT_printf(0, "Current: %lu uA\n", Microamps);
