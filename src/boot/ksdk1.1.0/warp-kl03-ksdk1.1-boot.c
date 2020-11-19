@@ -1480,8 +1480,12 @@ OSA_TimeDelay(1000);
 	//Print current in legit form
 	//SEGGER_RTT_WriteString(0, "\nYou're here Adam");
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	SEGGER_RTT_printf(0, "\nCurrent: %d uA\n", LSB_current);
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	SEGGER_RTT_printf(0, "\nCurrent: %d uA\n", cur_reg_read);
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	uint32_t	Microamps = LSB_current*cur_reg_read;
-	SEGGER_RTT_printf(0, "\nCurrent: %lu uA\n", Microamps);
+	SEGGER_RTT_printf(0, "\nCurrent: %d uA\n", Microamps);
 	OSA_TimeDelay(1000);
 }
 
