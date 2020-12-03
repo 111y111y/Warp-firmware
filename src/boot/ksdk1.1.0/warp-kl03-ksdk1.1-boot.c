@@ -1346,6 +1346,27 @@ main(void)
 	 *	Notreached
 	 */
 #endif
+//Coursework 5
+//Make the screen turn on
+	devSSD1331init();
+
+//I2C address definitions
+	i2c_status_t	status;
+	i2c_device_t	slave = {
+				.address = 0x40,
+				.baudRate_kbps = gWarpI2cBaudRateKbps
+				};
+
+
+
+
+
+
+
+
+
+
+/*
 //Coursework 2-4 begines here
 //TestTestTest	
 	//Make the screen turn on
@@ -1489,7 +1510,7 @@ for (i = 1; i < readings; ++i){
 
 	SEGGER_RTT_WriteString(0, "\nShove off Warp!!!\n");
 	//SEGGER_RTT_printf(0, "The number %d", 1);
-
+*/
 	while (1)
 	{
 	/*	
