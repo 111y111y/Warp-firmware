@@ -1347,7 +1347,7 @@ main(void)
 	 */
 #endif
 //Coursework 2-4 begines here
-	
+//TestTestTest	
 	//Make the screen turn on
 	devSSD1331init();
 
