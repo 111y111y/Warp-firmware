@@ -1350,19 +1350,15 @@ main(void)
 //Make the screen turn on
 	devSSD1331init();
 
-while (1){
+
 //I2C address definitions
-	uint16_t		user_input = 0; // Initialise user input variable
-	SEGGER_RTT_WriteString(0, "Enter register value: ");
-	user_input = readHexByte(); //Dodgy taking input into hex values of 4 digits
-	SEGGER_RTT_printf(0, "\nRegister value: 0x%02x%02x\n", user_input);
 	uint8_t		i2c_buffer[2];
 	i2c_status_t	status;
 	i2c_device_t	slave = {
 				.address = 0x23,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
-	uint8_t		calibration_register[1] = {0x00};
+	uint8_t		calibration_register[1] = {0x01};
 
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
@@ -1392,7 +1388,7 @@ disableI2Cpins();
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 SEGGER_RTT_WriteString(0, "You're here: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-}
+
 
 
 
