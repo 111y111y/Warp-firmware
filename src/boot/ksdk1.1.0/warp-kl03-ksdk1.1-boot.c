@@ -1351,6 +1351,7 @@ main(void)
 	devSSD1331init();
 
 //I2C address definitions
+	uint8_t		i2c_buffer[2];
 	i2c_status_t	status;
 	i2c_device_t	slave = {
 				.address = 0x23,
@@ -1381,7 +1382,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_printf(0, "Register value: %02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
-		
+	}
 
 disableI2Cpins();
 
