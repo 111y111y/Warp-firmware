@@ -1353,13 +1353,33 @@ main(void)
 //I2C address definitions
 	i2c_status_t	status;
 	i2c_device_t	slave = {
-				.address = 0x40,
+				.address = 0x23,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
+	uint8_t		calibration_register[1] = {0x00};
 
+	enableI2Cpins(menuI2cPullupValue);
+//Read from the calibration register
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) calibration_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
 
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Register value: %02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+		
 
+disableI2Cpins();
 
 
 
