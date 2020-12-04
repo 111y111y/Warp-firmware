@@ -1351,6 +1351,7 @@ main(void)
 	devSSD1331init();
 
 //I2C address definitions
+	uint16_t		user_input = 0; // Initialise user input variable
 	uint8_t		i2c_buffer[2];
 	i2c_status_t	status;
 	i2c_device_t	slave = {
@@ -1361,6 +1362,8 @@ main(void)
 
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 SEGGER_RTT_WriteString(0, "Enter to go!!!: ");
+user_input = readHexByte() << 8; //Dodgy taking input into hex values of 4 digits
+	user_input |= readHexByte();
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
