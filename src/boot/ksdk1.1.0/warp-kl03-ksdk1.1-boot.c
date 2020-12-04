@@ -1355,13 +1355,13 @@ main(void)
 	uint8_t		i2c_buffer[2];
 	i2c_status_t	status;
 	i2c_device_t	slave = {
-				.address = 0x22,
+				.address = 0x23,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t		calibration_register[1] = {0x00};
 
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-SEGGER_RTT_WriteString(0, "Enter to go!!!: ");
+SEGGER_RTT_WriteString(0, "Enter to go!!!\n: ");
 user_input = readHexByte() << 8; //Dodgy taking input into hex values of 4 digits
 	user_input |= readHexByte();
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
