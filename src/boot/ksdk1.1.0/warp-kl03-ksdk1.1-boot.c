@@ -1358,6 +1358,10 @@ main(void)
 				};
 	uint8_t		calibration_register[1] = {0x00};
 
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+SEGGER_RTT_WriteString(0, "Enter to go!!!: ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
 	enableI2Cpins(menuI2cPullupValue);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
@@ -1381,7 +1385,9 @@ main(void)
 
 disableI2Cpins();
 
-
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+SEGGER_RTT_WriteString(0, "You're here: ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 
 
