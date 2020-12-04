@@ -1355,7 +1355,7 @@ main(void)
 	uint8_t		i2c_buffer[2];
 	i2c_status_t	status;
 	i2c_device_t	slave = {
-				.address = 0x23,
+				.address = 0x22,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t		calibration_register[1] = {0x00};
