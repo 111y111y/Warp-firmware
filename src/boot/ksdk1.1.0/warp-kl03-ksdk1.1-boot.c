@@ -1360,11 +1360,12 @@ main(void)
 				};
 	uint8_t		calibration_register[1] = {0x01};
 	uint8_t		command = 0x01;
+	uint16_t	readings;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
 
-uint16_t	readings;
+
 SEGGER_RTT_WriteString(0, "Enter 0000 to give first command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
@@ -1388,7 +1389,7 @@ OSA_TimeDelay(2000);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-uint16_t	readings;
+
 SEGGER_RTT_WriteString(0, "Enter 0000 to give second command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
@@ -1411,7 +1412,7 @@ OSA_TimeDelay(2000);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-uint16_t	readings;
+
 SEGGER_RTT_WriteString(0, "Enter 0000 to read register: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
