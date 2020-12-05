@@ -1369,14 +1369,14 @@ SEGGER_RTT_WriteString(0, "Enter 0000 to give first command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
 
-
+//
 //Write to the calibration register
 OSA_TimeDelay(2000);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
 							0,
-							0x01,
+							(uint8_t *) 0x01,
 							1,
 							gWarpI2cTimeoutMilliseconds);
 
@@ -1399,7 +1399,7 @@ OSA_TimeDelay(2000);
 							&slave,
 							NULL,
 							0,
-							0x10,
+							(uint8_t *) 0x10,
 							1,
 							gWarpI2cTimeoutMilliseconds);
 
