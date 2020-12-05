@@ -1425,7 +1425,7 @@ OSA_TimeDelay(2000);
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
 							(uint8_t *) i,
-							0,
+							1,
 							(uint8_t *)i2c_buffer,
 							2,
 							gWarpI2cTimeoutMilliseconds);
