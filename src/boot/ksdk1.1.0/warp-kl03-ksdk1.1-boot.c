@@ -1380,7 +1380,8 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_WriteString(0, "Command given\n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
-
+int i;
+for (i = 1; i < 20; ++i){
 OSA_TimeDelay(1000);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
@@ -1399,9 +1400,9 @@ OSA_TimeDelay(1000);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-		SEGGER_RTT_printf(0, "Register value: %02x   %02x\n", i2c_buffer[0], i2c_buffer[1]);
+		SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
 	}
-
+}
 disableI2Cpins();
 
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
