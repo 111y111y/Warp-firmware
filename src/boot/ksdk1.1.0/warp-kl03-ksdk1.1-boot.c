@@ -1359,17 +1359,24 @@ main(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t		calibration_register[1] = {0x01};
-	uint8_t		command = 0x10;
+	uint8_t		command = 0x01;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
 
+uint16_t	readings;
+SEGGER_RTT_WriteString(0, "Enter 0000 to give first command: ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+readings = read4digits();
+
+
 //Write to the calibration register
+OSA_TimeDelay(2000);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
 							0,
-							(uint8_t *) command,
+							0x01,
 							1,
 							gWarpI2cTimeoutMilliseconds);
 
@@ -1378,11 +1385,41 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		SEGGER_RTT_WriteString(0, "Command given\n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
+
+uint16_t	readings;
+SEGGER_RTT_WriteString(0, "Enter 0000 to give second command: ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+readings = read4digits();
+
+//Write to the calibration register
+OSA_TimeDelay(2000);
+	status = I2C_DRV_MasterSendDataBlocking(0,
+							&slave,
+							NULL,
+							0,
+							0x10,
+							1,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_WriteString(0, "Command given\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+	}
+
+uint16_t	readings;
+SEGGER_RTT_WriteString(0, "Enter 0000 to read register: ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+readings = read4digits();
+
+
 int i;
 for (i = 1; i < 20; ++i){
-OSA_TimeDelay(1000);
+OSA_TimeDelay(2000);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
