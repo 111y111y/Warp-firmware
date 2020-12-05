@@ -1359,15 +1359,34 @@ main(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t		calibration_register[1] = {0x01};
-
+	uint8_t		command = 0x10;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
+
+//Write to the calibration register
+	status = I2C_DRV_MasterSendDataBlocking(0,
+							&slave,
+							NULL,
+							0,
+							(uint8_t *) command,
+							1,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_WriteString(0, "Command given\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	}
+
+OSA_TimeDelay(1000);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
-							(uint8_t *) calibration_register,
-							1,
+							NULL,
+							0,
 							(uint8_t *)i2c_buffer,
 							2,
 							gWarpI2cTimeoutMilliseconds);
@@ -1380,14 +1399,14 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else {
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-		SEGGER_RTT_printf(0, "Register value: %02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+		SEGGER_RTT_printf(0, "Register value: %02x   %02x\n", i2c_buffer[0], i2c_buffer[1]);
 	}
 
 disableI2Cpins();
 
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-SEGGER_RTT_WriteString(0, "You're here: ");
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+SEGGER_RTT_WriteString(0, "You're here: \n");
+OSA_TimeDelay(10000);
 
 
 
