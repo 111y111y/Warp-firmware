@@ -1400,7 +1400,7 @@ OSA_TimeDelay(2000);
 							&slave,
 							NULL,
 							0,
-							(uint8_t *) 0x10,
+							(uint8_t *) 0x13,
 							1,
 							gWarpI2cTimeoutMilliseconds);
 
