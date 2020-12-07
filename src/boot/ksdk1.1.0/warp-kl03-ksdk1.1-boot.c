@@ -1394,6 +1394,9 @@ SEGGER_RTT_WriteString(0, "Enter 0000 to give second command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
 
+int i;
+for (i = 1; i < 2000; ++i){
+
 //Write to the calibration register
 OSA_TimeDelay(2000);
 	status = I2C_DRV_MasterSendDataBlocking(0,
@@ -1412,14 +1415,13 @@ OSA_TimeDelay(2000);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-
+/*
 SEGGER_RTT_WriteString(0, "Enter 0000 to read register: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
+*/
 
 
-int i;
-for (i = 1; i < 20; ++i){
 OSA_TimeDelay(2000);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
