@@ -1374,13 +1374,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
 	uint8_t		payload_moisture[2] = {0x0F,0x10};
-	uint8_t		payload_temp[2] = {0x00,0x04}};
-
-	
-
-
-	
-	
+	uint8_t		payload_temp[2] = {0x00,0x04};
 
 
 int i;
