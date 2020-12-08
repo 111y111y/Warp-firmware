@@ -1364,18 +1364,18 @@ main(void)
 	userinput = readbinarybyte();
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	SEGGER_RTT_printf(0, "\nYour input: %x ", userinput);
-	uint8_t		command[1] = {0x10};
+	uint8_t		command[1] = {userinput};
 	uint16_t	readings;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
 
 
-SEGGER_RTT_WriteString(0, "Enter 0000 to give first command: ");
+SEGGER_RTT_WriteString(0, "\nEnter 0000 to give first command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
 
-SEGGER_RTT_WriteString(0, "Enter 0000 to give second command: ");
+SEGGER_RTT_WriteString(0, "\nEnter 0000 to give second command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
 
