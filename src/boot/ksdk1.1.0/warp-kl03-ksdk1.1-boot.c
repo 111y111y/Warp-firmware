@@ -1359,6 +1359,11 @@ main(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	//uint8_t		calibration_register[1] = {0x01};
+	uint8_t		userinput = 0;
+	SEGGER_RTT_WriteString(0, "\nEnter 8 bit binary command: ");
+	userinput = readbinarybyte();
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	SEGGER_RTT_WriteString(0, "\nYour input: %x ", userinput);
 	uint8_t		command[1] = {0x10};
 	uint16_t	readings;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
@@ -1369,26 +1374,6 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 SEGGER_RTT_WriteString(0, "Enter 0000 to give first command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
-
-//
-//Write to the lkight sensor
-OSA_TimeDelay(2000);
-	status = I2C_DRV_MasterSendDataBlocking(0,
-							&slave,
-							NULL,
-							0,
-							(uint8_t *) 0x01,
-							1,
-							gWarpI2cTimeoutMilliseconds);
-
-	if (status != kStatus_I2C_Success){
-		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	} else{
-		SEGGER_RTT_WriteString(0, "Command given\n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
-	}
-
 
 SEGGER_RTT_WriteString(0, "Enter 0000 to give second command: ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
@@ -3740,6 +3725,25 @@ read4digits(void)
 	digit4 = SEGGER_RTT_WaitKey();
 
 	return (digit1 - '0')*1000 + (digit2 - '0')*100 + (digit3 - '0')*10 + (digit4 - '0');
+}
+
+int
+readbinarybyte(void)
+{
+	uint8_t		digit1,digit2,digit3,digit4,digit5,digit6,digit7,digit8;
+
+	digit1 = SEGGER_RTT_WaitKey();
+	digit2 = SEGGER_RTT_WaitKey();
+	digit3 = SEGGER_RTT_WaitKey();
+	digit4 = SEGGER_RTT_WaitKey();
+	digit5 = SEGGER_RTT_WaitKey();
+	digit6 = SEGGER_RTT_WaitKey();
+	digit7 = SEGGER_RTT_WaitKey();
+	digit8 = SEGGER_RTT_WaitKey();
+
+	return (digit1 - '0')*128 + (digit2 - '0')*64 + (digit3 - '0')*32 + (digit4 - '0')*16 + (digit5 - '0')*8 + (digit6-'0')*4 + (digit7 - '0')*2 + (digit8 - '0')*1;
+
+
 }
 
 
