@@ -1350,6 +1350,7 @@ main(void)
 //Make the screen turn on
 	devSSD1331init();
 
+//Read from light sensor after giving command!!
 
 //I2C address definitions
 	uint8_t		i2c_buffer[2];
@@ -1370,14 +1371,6 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
 
-
-SEGGER_RTT_WriteString(0, "\nEnter 0000 to give first command: ");
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-readings = read4digits();
-
-SEGGER_RTT_WriteString(0, "\nEnter 0000 to give second command: ");
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-readings = read4digits();
 
 int i;
 for (i = 1; i < 2000; ++i){
@@ -1434,6 +1427,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 SEGGER_RTT_WriteString(0, "You're here: \n");
 OSA_TimeDelay(10000);
 
+//End reading from light sensor
 
 
 
