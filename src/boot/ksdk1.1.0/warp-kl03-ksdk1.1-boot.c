@@ -1373,7 +1373,12 @@ main(void)
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(menuI2cPullupValue);
-	uint8_t		payload[2] = {0x0F,0x10};
+	uint8_t		payload_moisture[2] = {0x0F,0x10};
+	uint8_t		payload_temp[2] = {0x00,0x04}};
+
+	
+
+
 	
 	
 
@@ -1386,7 +1391,7 @@ for(i = 1; i < 2000; ++i)
 							&slave,
 							NULL,
 							0,
-							(uint8_t *) payload,
+							(uint8_t *) payload_moisture,
 							2,
 							gWarpI2cTimeoutMilliseconds);
 
@@ -1417,8 +1422,51 @@ for(i = 1; i < 2000; ++i)
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-			SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
+			SEGGER_RTT_printf(0, "Capacitance Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
 		}
+
+
+	OSA_TimeDelay(2000);
+	status = I2C_DRV_MasterSendDataBlocking(0,
+							&slave,
+							NULL,
+							0,
+							(uint8_t *) payload_temp,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_WriteString(0, "Command given\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+	}
+
+
+	OSA_TimeDelay(2000);
+	//Read from the calibration register
+		status = I2C_DRV_MasterReceiveDataBlocking(0,
+								&slave,
+								NULL,
+								0,
+								(uint8_t *)i2c_buffer,
+								2,
+								gWarpI2cTimeoutMilliseconds);
+
+		
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+		if (status != kStatus_I2C_Success){
+			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
+			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		} else {
+			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			SEGGER_RTT_printf(0, "Temperature Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
+		}
+
+
+
 }
 
 
