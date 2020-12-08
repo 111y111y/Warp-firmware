@@ -1411,8 +1411,8 @@ OSA_TimeDelay(2000);
 //Read from the calibration register
 	status = I2C_DRV_MasterReceiveDataBlocking(0,
 							&slave,
-							(uint8_t *) i,
-							1,
+							NULL,
+							0,
 							(uint8_t *)i2c_buffer,
 							2,
 							gWarpI2cTimeoutMilliseconds);
