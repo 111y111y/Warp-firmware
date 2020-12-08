@@ -1358,8 +1358,8 @@ main(void)
 				.address = 0x23,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
-	uint8_t		calibration_register[1] = {0x01};
-	uint8_t		command = 0x01;
+	//uint8_t		calibration_register[1] = {0x01};
+	uint8_t		command[1] = {0x10};
 	uint16_t	readings;
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
@@ -1371,7 +1371,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 readings = read4digits();
 
 //
-//Write to the calibration register
+//Write to the lkight sensor
 OSA_TimeDelay(2000);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
@@ -1403,7 +1403,7 @@ OSA_TimeDelay(2000);
 							&slave,
 							NULL,
 							0,
-							(uint8_t *) 0x10,
+							(uint8_t *) command,
 							1,
 							gWarpI2cTimeoutMilliseconds);
 
