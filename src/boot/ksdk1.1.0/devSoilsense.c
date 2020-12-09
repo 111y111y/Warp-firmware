@@ -13,6 +13,8 @@
 #include "gpio_pins.h"
 #include "SEGGER_RTT.h"
 #include "warp.h"
+#include "devSoilsense.h"
+
 
 
 extern volatile uint32_t		gWarpI2cBaudRateKbps;
