@@ -35,7 +35,7 @@ uint32_t readMoisture(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t 	payload[2] = {0x0F,0x10};
-
+	uint16_t	moisture = 0;
 	enableI2Cpins(32768);
 		
 	OSA_TimeDelay(500);
@@ -72,7 +72,9 @@ uint32_t readMoisture(void)
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-			SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
+			moisture = i2c_buffer[0] << 8 | i2c_buffer[1];
+			SEGGER_RTT_printf(0, moisture);
+
 		}
 	disableI2Cpins();
 	
