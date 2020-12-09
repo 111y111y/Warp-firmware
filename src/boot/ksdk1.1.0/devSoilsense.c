@@ -25,16 +25,18 @@ extern volatile uint32_t		gWarpMenuPrintDelayMilliseconds;
 
 
 
-i2c_status_t readRegisterSoil(i2c_device_t slave, uint8_t reg_start, uint8_t reg_end, uint8_t * i2c_buffer, uint16_t menuI2cPullupValue)
+uint32_t readMoisture(void)
 {
-	
+
+	uint8_t			i2c_buffer[2];
 	i2c_status_t	status;
-	uint8_t 	payload[2] = {reg_start,reg_end};
-	
-	enableI2Cpins(menuI2cPullupValue);
-	int i;
-	for(i=1; i<1000; ++i) 
-	{
+	i2c_device_t	slave = {
+				.address = 0x36,
+				.baudRate_kbps = gWarpI2cBaudRateKbps
+				};
+	uint8_t 	payload[2] = {0x0F,0x10};
+
+	enableI2Cpins(32768);
 		
 	OSA_TimeDelay(500);
 	status = I2C_DRV_MasterSendDataBlocking(0,
@@ -72,10 +74,9 @@ i2c_status_t readRegisterSoil(i2c_device_t slave, uint8_t reg_start, uint8_t reg
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
 		}
-	}
 	disableI2Cpins();
 	
-	return status;
+	return 1;
 }
 
 

@@ -1379,7 +1379,12 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	uint8_t		payload_moisture[2] = {0x0F,0x10};
 	uint8_t		payload_temp[2] = {0x00,0x04};
 
-readRegisterSoil(slave,0x00,0x04,i2c_buffer,menuI2cPullupValue);
+int i;
+for(i=1;i<2000;++i)
+{
+	OSA_TimeDelay(1000);
+	readMoisture();
+}
 
 /*
 int i;
