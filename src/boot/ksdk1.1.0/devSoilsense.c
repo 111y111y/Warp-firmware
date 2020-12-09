@@ -79,7 +79,7 @@ uint32_t readMoisture(void)
 		}
 	disableI2Cpins();
 	
-	return 1;
+	return moisture;
 }
 
 
