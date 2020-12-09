@@ -1434,7 +1434,7 @@ for(i = 1; i < 2000; ++i)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		SEGGER_RTT_WriteString(0, "Command given\n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	}
 
 
