@@ -73,7 +73,7 @@ uint32_t readMoisture(void)
 		} else {
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			moisture = i2c_buffer[0] << 8 | i2c_buffer[1];
-			SEGGER_RTT_printf(0, moisture);
+			SEGGER_RTT_printf(0, "Moisture reading > %i ", moisture);
 
 		}
 	disableI2Cpins();
