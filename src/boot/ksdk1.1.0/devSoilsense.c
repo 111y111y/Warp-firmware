@@ -32,7 +32,11 @@ i2c_status_t readRegisterSoil(i2c_device_t slave, uint8_t reg_start, uint8_t reg
 	uint8_t 	payload[2] = {reg_start,reg_end};
 	
 	enableI2Cpins(menuI2cPullupValue);
-
+	int i;
+	for(i=1; i<1000; ++i) 
+	{
+		
+	OSA_TimeDelay(500);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -68,7 +72,7 @@ i2c_status_t readRegisterSoil(i2c_device_t slave, uint8_t reg_start, uint8_t reg
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
 		}
-
+	}
 	disableI2Cpins();
 	
 	return status;
