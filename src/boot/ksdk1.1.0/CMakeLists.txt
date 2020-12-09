@@ -118,6 +118,9 @@ ADD_EXECUTABLE(Warp
     "${ProjDirPath}/../../../../boards/Warp/gpio_pins.c"
     "${ProjDirPath}/../../../../boards/Warp/gpio_pins.h"
     "${ProjDirPath}/../../src/devSSD1331.c"
+    "${ProjDirPath}/../../src/devBH1750.c"
+    "${ProjDirPath}/../../src/devSoilsense.c"
+
 
 )
 SET_TARGET_PROPERTIES(Warp PROPERTIES OUTPUT_NAME "Warp.elf")

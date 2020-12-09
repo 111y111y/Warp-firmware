@@ -65,6 +65,9 @@
 #	include "devCCS811.h"
 #	include "devAMG8834.h"
 #	include "devSSD1331.h"
+#	include "devSoilsense.h"
+#	include "devBH1750.h"
+
 //#	include "devMAX11300.h"
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
