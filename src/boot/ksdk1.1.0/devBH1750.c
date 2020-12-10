@@ -51,7 +51,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
-		SEGGER_RTT_WriteString(0, "Command given\n");
+		//SEGGER_RTT_WriteString(0, "Command given\n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
@@ -73,7 +73,11 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-			SEGGER_RTT_printf(0, "Register value: %x   %x\n", i2c_buffer[0], i2c_buffer[1]);
+
+            reading = i2c_buffer[0] << 8;
+            reading |= i2c_buffer[1];
+            reading = reading / 1.2;
+			SEGGER_RTT_printf(0, "Register value: %d \n", reading);
 		}
 
 disableI2Cpins();
