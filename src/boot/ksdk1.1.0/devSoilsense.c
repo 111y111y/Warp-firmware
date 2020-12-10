@@ -92,7 +92,7 @@ double readTemp(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t 	payload[2] = {0x00,0x04};
-	uint32_t	temperature = 0;
+	int			temperature = 0;
 	double		celsius = 0;
 	enableI2Cpins(32768);
 		
@@ -135,7 +135,7 @@ double readTemp(void)
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
 			celsius = ((1.0/(1UL << 16)) * temperature);
-			SEGGER_RTT_printf(0, "\nCelsius reading > %f , %Lf  oC ", celsius, celsius);
+			SEGGER_RTT_printf(0, "\nCelsius reading > %f  oC ", celsius, celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		}
