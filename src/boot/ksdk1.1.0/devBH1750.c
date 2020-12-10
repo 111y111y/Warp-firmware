@@ -76,8 +76,9 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
             reading = i2c_buffer[0] << 8;
             reading |= i2c_buffer[1];
+            SEGGER_RTT_printf(0, "\nLux1 value: %d ", reading);
             reading = reading / 1.2;
-			SEGGER_RTT_printf(0, "Register value: %d \n", reading);
+			SEGGER_RTT_printf(0, "\nLux2 value: %d ", reading);
 		}
 
 disableI2Cpins();
