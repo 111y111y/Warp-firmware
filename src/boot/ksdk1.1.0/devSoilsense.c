@@ -38,7 +38,7 @@ uint32_t readMoisture(void)
 	uint16_t	moisture = 0;
 	enableI2Cpins(32768);
 		
-	OSA_TimeDelay(500);
+	OSA_TimeDelay(200);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -51,11 +51,11 @@ uint32_t readMoisture(void)
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
-		SEGGER_RTT_WriteString(0, "Command given\n");
+		SEGGER_RTT_WriteString(0, "\nCommand given");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-    OSA_TimeDelay(500);
+    OSA_TimeDelay(200);
 	//Read from the calibration register
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,
@@ -74,7 +74,7 @@ uint32_t readMoisture(void)
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			moisture = i2c_buffer[0] << 8;
 			moisture |= i2c_buffer[1];
-			SEGGER_RTT_printf(0, "Moisture reading > %d ", moisture);
+			SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
 
 		}
 	disableI2Cpins();
@@ -82,5 +82,65 @@ uint32_t readMoisture(void)
 	return moisture;
 }
 
+double readTemp(void)
+{
+
+	uint8_t			i2c_buffer[4];
+	i2c_status_t	status;
+	i2c_device_t	slave = {
+				.address = 0x36,
+				.baudRate_kbps = gWarpI2cBaudRateKbps
+				};
+	uint8_t 	payload[2] = {0x00,0x04};
+	uint32_t	temperature = 0;
+	double		celsius = 0;
+	enableI2Cpins(32768);
+		
+	OSA_TimeDelay(200);
+	status = I2C_DRV_MasterSendDataBlocking(0,
+							&slave,
+							NULL,
+							0,
+							payload,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else{
+		SEGGER_RTT_WriteString(0, "\nCommand given");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+	}
+
+    OSA_TimeDelay(200);
+	//Read from the calibration register
+		status = I2C_DRV_MasterReceiveDataBlocking(0,
+								&slave,
+								NULL,
+								0,
+								i2c_buffer,
+								4,
+								gWarpI2cTimeoutMilliseconds);
+
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+		if (status != kStatus_I2C_Success){
+			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
+			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		} else {
+			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			temperature = i2c_buffer[0] << 24;
+			temperature |= i2c_buffer[1] << 16;
+			temperature |= i2c_buffer[2] << 8;
+			temperature |= i2c_buffer[3];
+			celsius = (1/(1UL << 16) * temperature);
+			SEGGER_RTT_printf(0, "\nTemperature reading > %d  oC ", celsius);
+
+		}
+	disableI2Cpins();
+	
+	return celsius;
+}
 
 
