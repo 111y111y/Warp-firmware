@@ -1371,7 +1371,7 @@ main(void)
 	SEGGER_RTT_WriteString(0, "\nEnter 8 bit binary command: ");
 	userinput = readbinarybyte();
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	SEGGER_RTT_printf(0, "\nYour input: %x ", userinput);
+	SEGGER_RTT_printf(0, "\nYour input: %d ", userinput);
 	uint8_t		command[1] = {userinput};
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
