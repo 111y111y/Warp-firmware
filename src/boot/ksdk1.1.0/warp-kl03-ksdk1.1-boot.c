@@ -1383,7 +1383,7 @@ int i;
 for(i=1;i<2000;++i)
 {
 	OSA_TimeDelay(1000);
-	//readMoisture();
+	readMoisture();
 	OSA_TimeDelay(200);
 	readTemp();
 }

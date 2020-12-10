@@ -51,7 +51,7 @@ uint32_t readMoisture(void)
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
-		SEGGER_RTT_WriteString(0, "\nCommand given");
+		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
@@ -110,7 +110,7 @@ double readTemp(void)
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
-		SEGGER_RTT_WriteString(0, "\nCommand given");
+		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
@@ -136,7 +136,7 @@ double readTemp(void)
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
 			celsius = ((1.0/(1UL << 16)) * temperature);
-			SEGGER_RTT_printf(0, "\nCelsius reading > %d , %f  oC ", celsius, test);
+			SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		}
