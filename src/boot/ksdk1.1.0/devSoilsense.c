@@ -93,7 +93,7 @@ double readTemp(void)
 				};
 	uint8_t 	payload[2] = {0x00,0x04};
 	int			temperature = 0;
-	double		celsius = 0.0;
+	int			celsius = 0.0;
 	double		test = 1.0;
 	enableI2Cpins(32768);
 		
@@ -136,7 +136,7 @@ double readTemp(void)
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
 			celsius = ((1.0/(1UL << 16)) * temperature);
-			SEGGER_RTT_printf(0, "\nCelsius reading > %f , %f  oC ", celsius, test);
+			SEGGER_RTT_printf(0, "\nCelsius reading > %d , %f  oC ", celsius, test);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		}
