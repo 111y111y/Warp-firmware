@@ -6,4 +6,4 @@
 
 
 uint32_t readMoisture(void);
-double readTemp(void);
+int readTemp(void);

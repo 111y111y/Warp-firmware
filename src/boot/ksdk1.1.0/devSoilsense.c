@@ -82,7 +82,7 @@ uint32_t readMoisture(void)
 	return moisture;
 }
 
-double readTemp(void)
+int readTemp(void)
 {
 
 	uint8_t			i2c_buffer[4];

@@ -1386,6 +1386,8 @@ for(i=1;i<2000;++i)
 	readMoisture();
 	OSA_TimeDelay(200);
 	readTemp();
+	OSA_TimeDelay(200);
+	readlight();
 }
 
 /*
