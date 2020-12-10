@@ -1367,7 +1367,7 @@ main(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	//uint8_t		calibration_register[1] = {0x01};
-	uint8_t		userinput = 0;
+	uint16_t		userinput = 0;
 	SEGGER_RTT_WriteString(0, "\nEnter 8 bit binary command: ");
 	userinput = readbinarybyte();
 	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
