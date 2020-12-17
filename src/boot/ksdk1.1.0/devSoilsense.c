@@ -115,7 +115,7 @@ int readTemp(void)
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
-
+	OSA_TimeDelay(50);
 	//Read from the calibration register
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,
