@@ -5,5 +5,5 @@
 #endif
 
 
-uint32_t readMoisture(void);
+int readMoisture(void);
 int readTemp(void);
