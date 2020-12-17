@@ -1365,8 +1365,8 @@ int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
 int i;
 int user_input;
-SEGGER_RTT_WriteString(0, "Enter calibration value: ");
-
+SEGGER_RTT_WriteString(0, "Enter number of minutes (3 digits): ");
+user_input = read3digits();
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
@@ -3697,6 +3697,18 @@ read4digits(void)
 	return (digit1 - '0')*1000 + (digit2 - '0')*100 + (digit3 - '0')*10 + (digit4 - '0');
 }
 
+
+int
+read3digits(void)
+{
+	uint8_t		digit1, digit2, digit3;
+
+	digit1 = SEGGER_RTT_WaitKey();
+	digit2 = SEGGER_RTT_WaitKey();
+	digit3 = SEGGER_RTT_WaitKey();
+
+	return (digit1 - '0')*100 + (digit2 - '0')*10 + (digit3 - '0')*1;
+}
 
 int
 readbinarybyte(void)
