@@ -145,7 +145,7 @@ int readTemp(void)
 
 	disableI2Cpins();
 	
-	return celsius;
+	return total;
 }
 
 
