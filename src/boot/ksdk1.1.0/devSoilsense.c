@@ -38,6 +38,12 @@ int readMoisture(void)
 	uint16_t	moisture = 0;
 	uint16_t				menuI2cPullupValue = 32768;
 	enableI2Cpins(menuI2cPullupValue);
+
+	int			total = 0;
+	int i;
+	for(i=1;i<11;++i){
+	OSA_TimeDelay(50);
+
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -51,7 +57,7 @@ int readMoisture(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
     OSA_TimeDelay(50);
 	//Read from the calibration register
@@ -63,21 +69,23 @@ int readMoisture(void)
 								2,
 								gWarpI2cTimeoutMilliseconds);
 
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		if (status != kStatus_I2C_Success){
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			moisture = i2c_buffer[0] << 8;
 			moisture |= i2c_buffer[1];
+			total += moisture;
 			//SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
 
 		}
+	}
 	disableI2Cpins();
-	
-	return moisture;
+	total = total *0.1;
+	return total;
 }
 
 int readTemp(void)
@@ -98,7 +106,7 @@ int readTemp(void)
 	enableI2Cpins(menuI2cPullupValue);
 	int			total = 0;
 	int i;
-	for(i=1;i<101;++i){
+	for(i=1;i<11;++i){
 	OSA_TimeDelay(50);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
@@ -144,7 +152,7 @@ int readTemp(void)
 
 		
 		}
-	total = total * 0.01; 
+	total = total * 0.1; 
 	disableI2Cpins();
 	//SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
 	return total;

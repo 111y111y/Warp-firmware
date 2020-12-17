@@ -36,6 +36,10 @@ int readlight(void)
     int         reading = 0;
 
 	enableI2Cpins(menuI2cPullupValue);
+	int			total = 0;
+	int i;
+	for(i=1;i<11;++i){
+	OSA_TimeDelay(50);
 
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
@@ -50,7 +54,7 @@ int readlight(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		//SEGGER_RTT_WriteString(0, "Command given\n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
 	OSA_TimeDelay(50);
@@ -70,16 +74,17 @@ int readlight(void)
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
             reading = i2c_buffer[0] << 8;
             reading |= i2c_buffer[1];
             reading = reading / 1.2;
-			SEGGER_RTT_printf(0, "\nLux value > %d ", reading);
+			total += reading;
+			//SEGGER_RTT_printf(0, "\nLux value > %d ", reading);
 		}
-
+	}
 disableI2Cpins();
-
-return reading;
+total = total * 0.1;
+return total;
 
 }
