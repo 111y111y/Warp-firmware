@@ -128,11 +128,11 @@ devSSD1331init(void)
 	writeCommand(kSSD1331CommandMASTERCURRENT);	// 0x87
 	writeCommand(0x0F);
 	writeCommand(kSSD1331CommandCONTRASTA);		// 0x81
-	writeCommand(0x91);
+	writeCommand(0xFF);
 	writeCommand(kSSD1331CommandCONTRASTB);		// 0x82
 	writeCommand(0xFF);
 	writeCommand(kSSD1331CommandCONTRASTC);		// 0x83
-	writeCommand(0x7D);
+	writeCommand(0xFF);
 	writeCommand(kSSD1331CommandDISPLAYON);		// Turn on oled panel
 
 	/*
@@ -156,6 +156,7 @@ devSSD1331init(void)
 	 *	Any post-initialization drawing commands go here.
 	 */
 	//...
+	/*
 	writeCommand(kSSD1331CommandDRAWRECT);	//Enter draw rectangle mode
 	writeCommand(0x00);			//Enter start column
 	writeCommand(0x00);			//Enter start row
@@ -167,7 +168,24 @@ devSSD1331init(void)
 	writeCommand(0x00);			//Set fill to green (colour C red)
 	writeCommand(0x3F);			// Colour B (green)
 	writeCommand(0x00);			// Colour A (blue)
-
+*/
 
 	return 0;
+}
+
+
+
+int
+drawaline(void)
+{
+writeCommand(kSSD1331CommandDRAWLINE);
+writeCommand(0x00); 					//Column start 0x00 - 0x5F
+writeCommand(0x15);					//Row Start 0x00 - 0x3F
+writeCommand(0x5F);					//Column End
+writeCommand(0x3F);					//Row End
+writeCommand(0x3F);					//Color C 0x00 - 0x3F
+writeCommand(0x00);					//Color B 0x00 - 0x3F
+writeCommand(0x00);					//Color A 0x00 - 0x3F
+
+return 0;
 }

@@ -1354,6 +1354,8 @@ main(void)
 
 //Make the screen turn on
 	devSSD1331init();
+	OSA_TimeDelay(1000);
+	drawaline();
 
 
 
