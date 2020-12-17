@@ -1363,7 +1363,7 @@ int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	percent = readLux() * 0.1;
+	percent = readlight() * 0.1;
 	drawaline_yellow(i,i+1,percent,percent);
 	}
 
