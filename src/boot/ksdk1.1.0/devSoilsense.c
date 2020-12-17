@@ -95,7 +95,7 @@ int readTemp(void)
 	enableI2Cpins(32768);
 	int			total = 0;
 	int i;
-	for(i=1;i<11;++i){
+	for(i=1;i<101;++i){
 
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
@@ -143,7 +143,7 @@ int readTemp(void)
 
 		
 		}
-	total = total * 0.1; 
+	total = total * 0.01; 
 	disableI2Cpins();
 	SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
 	return total;
