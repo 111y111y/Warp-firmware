@@ -93,7 +93,10 @@ int readTemp(void)
 	int			celsius = 0.0;
 	double		test = 1.0;
 	enableI2Cpins(32768);
-		
+	
+	int i;
+	for(i=1;i<10;++i){
+
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -134,7 +137,7 @@ int readTemp(void)
 			celsius = ((1.0/(1UL << 16)) * temperature);
 			//SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-
+		}
 		}
 	disableI2Cpins();
 	
