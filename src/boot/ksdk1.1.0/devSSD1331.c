@@ -183,9 +183,7 @@ int column_end = (column_end_percent / 100) * 95;
 int row_start = (row_start_percent / 100) * 63;
 int row_end = (row_end_percent / 100) * 63;
 
-
-
-
+SEGGER_RTT_printf(0, "\ncolumn_start_percent > %d \n column_start > %d ", column_start_percent, column_start);
 
 writeCommand(kSSD1331CommandDRAWLINE);
 writeCommand(column_start); 					//Column start 0x00 - 0x5F
