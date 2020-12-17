@@ -1357,14 +1357,16 @@ main(void)
 	OSA_TimeDelay(1000);
 	//drawaline_blue(20,80,5,25);
 
-int percent = 0;
+int percent1 = readlight() * 0.1;
+int percent2 = percent1;
 
 int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	percent = readlight() * 0.1;
-	drawaline_yellow(i,i+1,percent,percent);
+	drawaline_yellow(i,i+1,percent1,percent2);
+	percent1 = percent2;
+	percent2 = readlight() * 0.1;
 	}
 
 
