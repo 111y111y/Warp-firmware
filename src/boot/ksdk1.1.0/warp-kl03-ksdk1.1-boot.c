@@ -1363,8 +1363,8 @@ int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
 int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
-
 int i;
+int user_input;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
@@ -1379,6 +1379,23 @@ for(i=1;i<100;++i)
 	moisture_percent1 = moisture_percent2;
 	moisture_percent2 = (readMoisture()-320)*0.1429;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3678,21 +3695,6 @@ read4digits(void)
 
 	return (digit1 - '0')*1000 + (digit2 - '0')*100 + (digit3 - '0')*10 + (digit4 - '0');
 }
-
-
-int
-read3digits(void)
-{
-	uint8_t		digit1, digit2, digit3;
-
-	digit1 = SEGGER_RTT_WaitKey();
-	digit2 = SEGGER_RTT_WaitKey();
-	digit3 = SEGGER_RTT_WaitKey();
-
-
-	return (digit1 - '0')*100 + (digit2 - '0')*10 + (digit3 - '0');
-}
-
 
 
 int
