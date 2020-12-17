@@ -181,11 +181,23 @@ drawaline(void)
 writeCommand(kSSD1331CommandDRAWLINE);
 writeCommand(0x00); 					//Column start 0x00 - 0x5F
 writeCommand(0x15);					//Row Start 0x00 - 0x3F
-writeCommand(0x5F);					//Column End
+writeCommand(0x20);					//Column End
+writeCommand(0x00);					//Row End
+writeCommand(0x3F);					//Color C (Red) 0x00 - 0x3F
+writeCommand(0x00);					//Color B (Green) 0x00 - 0x3F
+writeCommand(0x00);					//Color A (Blue) 0x00 - 0x3F
+
+writeCommand(kSSD1331CommandDRAWLINE);
+writeCommand(0x21); 					//Column start 0x00 - 0x5F
+writeCommand(0x15);					//Row Start 0x00 - 0x3F
+writeCommand(0x20);					//Column End
 writeCommand(0x3F);					//Row End
-writeCommand(0x3F);					//Color C 0x00 - 0x3F
-writeCommand(0x00);					//Color B 0x00 - 0x3F
-writeCommand(0x00);					//Color A 0x00 - 0x3F
+writeCommand(0x00);					//Color C (Red) 0x00 - 0x3F
+writeCommand(0x00);					//Color B (Green) 0x00 - 0x3F
+writeCommand(0x3F);					//Color A (Blue) 0x00 - 0x3F
+
+
+
 
 return 0;
 }
