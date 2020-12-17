@@ -25,7 +25,7 @@ extern volatile uint32_t		gWarpMenuPrintDelayMilliseconds;
 
 
 
-uint32_t readMoisture(void)
+int readMoisture(void)
 {
 
 	uint8_t			i2c_buffer[2];
@@ -74,7 +74,7 @@ uint32_t readMoisture(void)
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			moisture = i2c_buffer[0] << 8;
 			moisture |= i2c_buffer[1];
-			SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
+			//SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
 
 		}
 	disableI2Cpins();
@@ -136,7 +136,7 @@ int readTemp(void)
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
 			celsius = ((1.0/(1UL << 16)) * temperature);
-			SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
+			//SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		}
