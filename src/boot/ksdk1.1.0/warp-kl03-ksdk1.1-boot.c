@@ -1361,7 +1361,6 @@ int light_percent1 = readlight() * 0.143;
 int light_percent2 = light_percent1;
 int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
-enableI2Cpins(menuI2cPullupValue);
 int i;
 for(i=1;i<100;++i)
 {
@@ -1372,11 +1371,9 @@ for(i=1;i<100;++i)
 	light_percent2 = readlight() * 0.1;
 	temp_percent1 = temp_percent2;
 	temp_percent2 = (readTemp()-14) * 6.25;
-	
-
 	}
 
-	disableI2Cpins();
+
 
 
 

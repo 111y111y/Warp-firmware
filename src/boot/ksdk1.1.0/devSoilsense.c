@@ -36,6 +36,8 @@ int readMoisture(void)
 				};
 	uint8_t 	payload[2] = {0x0F,0x10};
 	uint16_t	moisture = 0;
+	uint16_t				menuI2cPullupValue = 32768;
+	enableI2Cpins(menuI2cPullupValue);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -73,7 +75,8 @@ int readMoisture(void)
 			//SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
 
 		}
-
+	disableI2Cpins();
+	
 	return moisture;
 }
 
@@ -87,9 +90,12 @@ int readTemp(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t 	payload[2] = {0x00,0x04};
+	uint16_t				menuI2cPullupValue = 32768;
 	int			temperature = 0;
 	int			celsius = 0.0;
 	double		test = 1.0;
+	
+	enableI2Cpins(menuI2cPullupValue);
 	int			total = 0;
 	int i;
 	for(i=1;i<101;++i){
@@ -141,6 +147,7 @@ int readTemp(void)
 		
 		}
 	total = total * 0.01; 
+	disableI2Cpins();
 	SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
 	return total;
 }

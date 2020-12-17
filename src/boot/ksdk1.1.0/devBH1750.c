@@ -32,9 +32,10 @@ int readlight(void)
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
 	uint8_t		command[1] = {0x23};
+	uint16_t				menuI2cPullupValue = 32768;
     int         reading = 0;
 
-	enableI2Cpins(32768);
+	enableI2Cpins(menuI2cPullupValue);
 
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
