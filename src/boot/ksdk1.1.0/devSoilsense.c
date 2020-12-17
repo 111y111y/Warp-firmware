@@ -113,7 +113,7 @@ int readTemp(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	} else{
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
+		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
 	//Read from the calibration register
@@ -125,29 +125,28 @@ int readTemp(void)
 								4,
 								gWarpI2cTimeoutMilliseconds);
 
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 		if (status != kStatus_I2C_Success){
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		} else {
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			temperature = i2c_buffer[0] << 24;
 			temperature |= i2c_buffer[1] << 16;
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
 			celsius = ((1.0/(1UL << 16)) * temperature);
-			SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			//SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
+			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			total = total + celsius;
-			SEGGER_RTT_printf(0, "\nTotal reading > %d oC ", total);
+			//SEGGER_RTT_printf(0, "\nTotal reading > %d oC ", total);
 		}
 
 		
 		}
 	total = total * 0.01; 
 	disableI2Cpins();
-	SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
+	//SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
 	return total;
 }
 
