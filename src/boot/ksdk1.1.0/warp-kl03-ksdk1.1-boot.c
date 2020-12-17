@@ -1363,9 +1363,20 @@ int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
 int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
+
+uint16_t		user_input = 0; // Initialise user input variable
+	SEGGER_RTT_WriteString(0, "Enter calibration value: ");
+	user_input = readHexByte() << 8; //Dodgy taking input into hex values of 4 digits
+	user_input |= readHexByte();
+	SEGGER_RTT_printf(0, "\nEntered 0x%04x\n", user_input);
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+
+
+
+
+
 int i;
-int user_input;
-SEGGER_RTT_printf(0, "\nEnter number of minutes required (3 digits) \n");
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
