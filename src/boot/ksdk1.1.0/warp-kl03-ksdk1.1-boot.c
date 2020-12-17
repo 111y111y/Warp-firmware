@@ -1365,6 +1365,8 @@ int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
 int i;
 int user_input;
+SEGGER_RTT_WriteString(0, "Enter calibration value: ");
+
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
