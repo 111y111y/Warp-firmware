@@ -178,7 +178,7 @@ devSSD1331init(void)
 int
 drawaline_blue(int column_start_percent, int column_end_percent, int row_start_percent, int row_end_percent)
 {
-int column_start = (column_start_percent / 100) * 95;
+int column_start = column_start_percent * 0.95;
 int column_end = (column_end_percent / 100) * 95;
 int row_start = (row_start_percent / 100) * 63;
 int row_end = (row_end_percent / 100) * 63;
