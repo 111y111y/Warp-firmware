@@ -134,11 +134,15 @@ int readTemp(void)
 			temperature |= i2c_buffer[1] << 16;
 			temperature |= i2c_buffer[2] << 8;
 			temperature |= i2c_buffer[3];
-			celsius = ((1.0/(1UL << 16)) * temperature);
+			celsius = celsius + ((1.0/(1UL << 16)) * temperature);
 			//SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		}
+
+
 		}
+		celsius = celsius * 0.1;
+
 	disableI2Cpins();
 	
 	return celsius;
