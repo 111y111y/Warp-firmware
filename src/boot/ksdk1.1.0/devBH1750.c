@@ -34,7 +34,6 @@ int readlight(void)
 	uint8_t		command[1] = {0x23};
     int         reading = 0;
 
-	enableI2Cpins(32768);
 
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
@@ -77,7 +76,6 @@ int readlight(void)
 			SEGGER_RTT_printf(0, "\nLux value > %d ", reading);
 		}
 
-disableI2Cpins();
 
 return reading;
 
