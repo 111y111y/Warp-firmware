@@ -1363,16 +1363,18 @@ int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
 int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
-int i;
+
 int user_input;
 int delay;
 SEGGER_RTT_WriteString(0, "Enter number of minutes to run for (3 digits): ");
 user_input = read3digits();
 delay = user_input * 6000 - 3500;
+
+int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(delay);
-	SEGGER_RTT_printf(0, "\nOSA Time > %d , i value > %d \n", OSA_TimeGetMsec(),i);
+	SEGGER_RTT_printf(0, "\nOSA Time > %d  i value > %d \n", OSA_TimeGetMsec(), i);
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
