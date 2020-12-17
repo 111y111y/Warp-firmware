@@ -1365,15 +1365,12 @@ int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
 int i;
 int user_input;
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 SEGGER_RTT_WriteString(0, "Enter number of minutes (4 digits): ");
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-user_input = read4digits()*600-3500;
-SEGGER_RTT_printf(0, "\nDelay value > %d\n", user_input);
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+user_input = read4digits();
+SEGGER_RTT_WriteString(0, "You're here! ");
 for(i=1;i<100;++i)
 {
-	OSA_TimeDelay(user_input);
+	OSA_TimeDelay(1000);
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
