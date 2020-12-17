@@ -176,16 +176,25 @@ devSSD1331init(void)
 
 
 int
-drawaline(void)
+drawaline_blue(int column_start_percent, int column_end_percent, int row_start_percent, int row_end_percent)
 {
+int column_start = (column_start_percent / 100) * 95;
+int column_end = (column_end_percent / 100) * 95;
+int row_start = (row_start_percent / 100) * 63;
+int row_end = (row_end_percent / 100) * 63;
+
+
+
+
+
 writeCommand(kSSD1331CommandDRAWLINE);
-writeCommand(0x00); 					//Column start 0x00 - 0x5F
-writeCommand(21);					//Row Start 0x00 - 0x3F
-writeCommand(0x20);					//Column End
-writeCommand(0x00);					//Row End
-writeCommand(0x3F);					//Color C (Red) 0x00 - 0x3F
+writeCommand(column_start); 					//Column start 0x00 - 0x5F
+writeCommand(row_start);					//Row Start 0x00 - 0x3F
+writeCommand(column_end);					//Column End
+writeCommand(row_end);					//Row End
+writeCommand(0x00);					//Color C (Red) 0x00 - 0x3F
 writeCommand(0x00);					//Color B (Green) 0x00 - 0x3F
-writeCommand(0x00);					//Color A (Blue) 0x00 - 0x3F
+writeCommand(0x3F);					//Color A (Blue) 0x00 - 0x3F
 
 
 return 0;

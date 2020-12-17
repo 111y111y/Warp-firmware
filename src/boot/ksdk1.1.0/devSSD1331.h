@@ -43,4 +43,4 @@ typedef enum
 } SSD1331Commands;
 
 int	devSSD1331init(void);
-int drawaline(void);
+int drawaline_blue(int column_start_percent, int column_end_percent, int row_start_percent, int row_end_percent);
