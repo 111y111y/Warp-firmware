@@ -93,7 +93,7 @@ int readTemp(void)
 	int			celsius = 0.0;
 	double		test = 1.0;
 	enableI2Cpins(32768);
-	
+	int			total =0;
 	int i;
 	for(i=1;i<10;++i){
 
