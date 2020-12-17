@@ -1366,7 +1366,9 @@ int moisture_percent2 = moisture_percent1;
 int i;
 int user_input;
 SEGGER_RTT_WriteString(0, "Enter number of minutes (4 digits): ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 user_input = read4digits()*600-3500;
+SEGGER_RTT_printf(0, "\nDelay value > %d\n", user_input);
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(user_input);
