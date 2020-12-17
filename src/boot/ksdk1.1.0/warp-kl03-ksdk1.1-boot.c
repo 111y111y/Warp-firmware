@@ -1367,7 +1367,6 @@ int i;
 int user_input;
 SEGGER_RTT_WriteString(0, "Enter number of minutes (4 digits): ");
 user_input = read4digits();
-SEGGER_RTT_WriteString(0, "You're here! ");
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
