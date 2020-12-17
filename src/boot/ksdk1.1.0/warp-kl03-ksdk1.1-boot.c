@@ -1367,14 +1367,14 @@ for(i=1;i<100;++i)
 	OSA_TimeDelay(1000);
 	int j;
 	int average_temp = 0;
-	for(j=1; j<10; ++j){
+	for(j=1; j<2; ++j){
 		average_temp = average_temp + (readTemp()-14) * 6.25;
 	}
 	average_temp = average_temp * 0.1;
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,average_temp);
 	light_percent1 = light_percent2;
-	light_percent2 = readlight() * 0.1;
+	light_percent2 = readlight() * 0.5;
 	temp_percent1 = average_temp;
 	
 
