@@ -141,9 +141,9 @@ int readTemp(void)
 			SEGGER_RTT_printf(0, "\nTotal reading > %d oC ", total);
 		}
 
-		total = total * 0.1; 
+		
 		}
-
+	total = total * 0.1; 
 	disableI2Cpins();
 	SEGGER_RTT_printf(0, "\nAverage reading > %d oC ", total);
 	return total;
