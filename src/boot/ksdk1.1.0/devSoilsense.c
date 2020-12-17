@@ -37,8 +37,6 @@ int readMoisture(void)
 	uint8_t 	payload[2] = {0x0F,0x10};
 	uint16_t	moisture = 0;
 	enableI2Cpins(32768);
-		
-	OSA_TimeDelay(200);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -54,8 +52,7 @@ int readMoisture(void)
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
-
-    OSA_TimeDelay(200);
+    OSA_TimeDelay(50);
 	//Read from the calibration register
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,
@@ -97,7 +94,6 @@ int readTemp(void)
 	double		test = 1.0;
 	enableI2Cpins(32768);
 		
-	OSA_TimeDelay(200);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -114,7 +110,7 @@ int readTemp(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-    OSA_TimeDelay(200);
+    OSA_TimeDelay(50);
 	//Read from the calibration register
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,

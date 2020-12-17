@@ -197,3 +197,49 @@ writeCommand(0x3F);					//Color A (Blue) 0x00 - 0x3F
 
 return 0;
 }
+
+int
+drawaline_red(int column_start_percent, int column_end_percent, int row_start_percent, int row_end_percent)
+{
+int column_start = column_start_percent * 0.95;
+int column_end = column_end_percent * 0.95;
+int row_start = 63 - row_start_percent * 0.63;
+int row_end = 63 - row_end_percent * 0.63;
+
+SEGGER_RTT_printf(0, "\ncolumn_start_percent > %d \n column_start > %d ", column_start_percent, column_start);
+
+writeCommand(kSSD1331CommandDRAWLINE);
+writeCommand(column_start); 					//Column start 0x00 - 0x5F
+writeCommand(row_start);					//Row Start 0x00 - 0x3F
+writeCommand(column_end);					//Column End
+writeCommand(row_end);					//Row End
+writeCommand(0x3F);					//Color C (Red) 0x00 - 0x3F
+writeCommand(0x00);					//Color B (Green) 0x00 - 0x3F
+writeCommand(0x00);					//Color A (Blue) 0x00 - 0x3F
+
+
+return 0;
+}
+
+int
+drawaline_yellow(int column_start_percent, int column_end_percent, int row_start_percent, int row_end_percent)
+{
+int column_start = column_start_percent * 0.95;
+int column_end = column_end_percent * 0.95;
+int row_start = 63 - row_start_percent * 0.63;
+int row_end = 63 - row_end_percent * 0.63;
+
+SEGGER_RTT_printf(0, "\ncolumn_start_percent > %d \n column_start > %d ", column_start_percent, column_start);
+
+writeCommand(kSSD1331CommandDRAWLINE);
+writeCommand(column_start); 					//Column start 0x00 - 0x5F
+writeCommand(row_start);					//Row Start 0x00 - 0x3F
+writeCommand(column_end);					//Column End
+writeCommand(row_end);					//Row End
+writeCommand(0x3F);					//Color C (Red) 0x00 - 0x3F
+writeCommand(0x3F);					//Color B (Green) 0x00 - 0x3F
+writeCommand(0x00);					//Color A (Blue) 0x00 - 0x3F
+
+
+return 0;
+}

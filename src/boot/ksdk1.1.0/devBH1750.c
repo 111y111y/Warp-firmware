@@ -31,14 +31,11 @@ int readlight(void)
 				.address = 0x23,
 				.baudRate_kbps = gWarpI2cBaudRateKbps
 				};
-	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	uint8_t		command[1] = {0x23};
     int         reading = 0;
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 	enableI2Cpins(32768);
 
-	OSA_TimeDelay(200);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
@@ -55,7 +52,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-	OSA_TimeDelay(200);
+	OSA_TimeDelay(50);
 
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,

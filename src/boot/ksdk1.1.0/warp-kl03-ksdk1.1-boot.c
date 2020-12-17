@@ -1360,14 +1360,12 @@ main(void)
 int percent = 0;
 
 int i;
-for(i=1;i<10000;++i)
+for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	percent = (readMoisture() - 315) * 0.1418;
-	SEGGER_RTT_printf(0, "\nPercent 1 >  %d\n", readMoisture());
-	
-
-}
+	percent = readLux() * 0.1;
+	drawaline_yellow(i,i+1,percent,percent);
+	}
 
 
 
