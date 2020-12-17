@@ -137,6 +137,7 @@ int readTemp(void)
 			celsius = ((1.0/(1UL << 16)) * temperature);
 			//SEGGER_RTT_printf(0, "\nCelsius reading > %d oC ", celsius);
 			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			total += celsius;
 		}
 
 
