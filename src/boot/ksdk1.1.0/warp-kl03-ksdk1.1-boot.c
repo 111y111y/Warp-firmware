@@ -1375,7 +1375,7 @@ for(i=1;i<100;++i)
 	temp_percent1 = temp_percent2;
 	temp_percent2 = (readTemp()-14) * 6.25;
 	moisture_percent1 = moisture_percent2;
-	moisture_percent2 = = (readMoisture()-320)*0.1429;
+	moisture_percent2 = (readMoisture()-320)*0.1429;
 	}
 
 
