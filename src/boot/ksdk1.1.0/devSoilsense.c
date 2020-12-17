@@ -99,7 +99,7 @@ int readTemp(void)
 	int			total = 0;
 	int i;
 	for(i=1;i<101;++i){
-
+	OSA_TimeDelay(50);
 	status = I2C_DRV_MasterSendDataBlocking(0,
 							&slave,
 							NULL,
