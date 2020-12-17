@@ -56,7 +56,7 @@
 *	Comment out the header file to disable devices
 */
 #ifndef WARP_FRDMKL03
-#	include "devBMX055.h"
+//#	include "devBMX055.h"
 #	include "devMMA8451Q.h"
 #	include "devHDC1000.h"
 #	include "devMAG3110.h"
@@ -1360,22 +1360,18 @@ main(void)
 int light_percent1 = readlight() * 0.143;
 int light_percent2 = light_percent1;
 int temp_percent1 = (readTemp()-14) * 6.25;
+int temp_percent2 = temp_percent1;
 
 int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	int j;
-	int average_temp = 0;
-	for(j=1; j<2; ++j){
-		average_temp = average_temp + (readTemp()-14) * 6.25;
-	}
-	average_temp = average_temp * 0.1;
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
-	drawaline_red(i,i+1,temp_percent1,average_temp);
+	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	light_percent1 = light_percent2;
-	light_percent2 = readlight() * 0.5;
-	temp_percent1 = average_temp;
+	light_percent2 = readlight() * 0.1;
+	temp_percent1 = temp_percent2;
+	temp_percent2 = (readTemp()-14) * 6.25;
 	
 
 	}
