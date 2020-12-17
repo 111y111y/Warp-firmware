@@ -1362,24 +1362,7 @@ main(void)
 //Reading from Capacitive sensor starts here
 
 //I2C address definitions
-	uint8_t		i2c_buffer[2];
-	i2c_status_t	status;
-	i2c_device_t	slave = {
-				.address = 0x36,
-				.baudRate_kbps = gWarpI2cBaudRateKbps
-				};
 	//uint8_t		calibration_register[1] = {0x01};
-	uint16_t		userinput = 0;
-	SEGGER_RTT_WriteString(0, "\nEnter 8 bit binary command: ");
-	userinput = readbinarybyte();
-	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-	SEGGER_RTT_printf(0, "\nYour input: %d ", userinput);
-	uint8_t		command[1] = {userinput};
-OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-
-	enableI2Cpins(menuI2cPullupValue);
-	uint8_t		payload_moisture[2] = {0x0F,0x10};
-	uint8_t		payload_temp[2] = {0x00,0x04};
 
 int i;
 for(i=1;i<2000;++i)
