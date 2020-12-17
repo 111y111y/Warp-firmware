@@ -116,7 +116,6 @@ int readTemp(void)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
 	}
 
-    OSA_TimeDelay(50);
 	//Read from the calibration register
 		status = I2C_DRV_MasterReceiveDataBlocking(0,
 								&slave,
