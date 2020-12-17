@@ -1367,6 +1367,7 @@ int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
+	SEGGER_RTT_printf(0, "\nOSA Time > %d , i value > %d \n", OSA_TimeGetMsec(),i);
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
