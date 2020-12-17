@@ -1363,11 +1363,9 @@ int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	percent = (readMoisture() - 315);
+	percent = (readMoisture() - 315) * 0.1418;
 	SEGGER_RTT_printf(0, "\nPercent 1 >  %d\n", percent);
-	percent = percent * 0.001418;
-	OSA_TimeDelay(500);
-	SEGGER_RTT_printf(0, "\nPercent 2 >  %d\n", percent);
+	
 
 }
 
