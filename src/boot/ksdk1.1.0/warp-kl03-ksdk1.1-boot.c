@@ -1357,7 +1357,6 @@ main(void)
 	devSSD1331init();
 	OSA_TimeDelay(1000);
 	//drawaline_blue(20,80,5,25);
-int delay =0;
 
 int light_percent1 = readlight() * 0.143;
 int light_percent2 = light_percent1;
@@ -1365,13 +1364,11 @@ int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
 int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
-SEGGER_RTT_WriteString(0,"\nPlease input time required (4 digits): ");
-delay = (read4digits()*600)-3500;
 
 int i;
 for(i=1;i<100;++i)
 {
-	OSA_TimeDelay(1000);
+	OSA_TimeDelay(500);
 	SEGGER_RTT_WriteString(0,"\nTest: ");
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
