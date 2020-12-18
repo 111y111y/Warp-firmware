@@ -51,7 +51,7 @@ int readlight(void)
 
 	if (status != kStatus_I2C_Success){
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		OSA_TimeDelay(1000);
 	} else{
 		//SEGGER_RTT_WriteString(0, "Command given\n");
 		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
@@ -72,7 +72,7 @@ int readlight(void)
 
 		if (status != kStatus_I2C_Success){
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			OSA_TimeDelay(1000);
 		} else {
 			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 

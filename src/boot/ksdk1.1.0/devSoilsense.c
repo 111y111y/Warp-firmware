@@ -54,7 +54,7 @@ int readMoisture(void)
 
 	if (status != kStatus_I2C_Success){
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		OSA_TimeDelay(1000);
 	} else{
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
@@ -73,7 +73,7 @@ int readMoisture(void)
 
 		if (status != kStatus_I2C_Success){
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			OSA_TimeDelay(1000);
 		} else {
 			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			moisture = i2c_buffer[0] << 8;
@@ -117,7 +117,7 @@ int readTemp(void)
 
 	if (status != kStatus_I2C_Success){
 		SEGGER_RTT_WriteString(0, "Failed to write command :( \n");
-		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		OSA_TimeDelay(1000);
 	} else{
 		//SEGGER_RTT_WriteString(0, "\nCommand given");
 		//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds); 
@@ -135,7 +135,7 @@ int readTemp(void)
 
 		if (status != kStatus_I2C_Success){
 			SEGGER_RTT_WriteString(0, "Failed to read  :( \n");
-			OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+			OSA_TimeDelay(1000);
 		} else {
 			//OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 			temperature = i2c_buffer[0] << 24;

@@ -1353,6 +1353,9 @@ main(void)
 //Coursework 5
 
 int delay = 0;
+SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (3 digits): ");
+OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+delay = read3digits();
 SEGGER_RTT_printf(0,"\nTest: %x ",delay);
 
 
@@ -1373,7 +1376,6 @@ int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(500);
-	SEGGER_RTT_WriteString(0,"\nTest: ");
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
