@@ -1379,7 +1379,6 @@ int moisture_percent2 = moisture_percent1;
 int i;
 for(i=1;i<100;++i)
 {
-	OSA_TimeDelay(delay);
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
@@ -1391,7 +1390,7 @@ for(i=1;i<100;++i)
 	OSA_TimeDelay(25);
 	moisture_percent1 = moisture_percent2;
 	moisture_percent2 = (readMoisture()-320)*0.1429;
-	OSA_TimeDelay(25);
+	OSA_TimeDelay(delay);
 	}
 
 
