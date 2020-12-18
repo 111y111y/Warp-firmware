@@ -1353,10 +1353,10 @@ main(void)
 //Coursework 5
 
 int delay = 0;
-SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (4 digits): ");
+SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (3 digits, min 006): ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 delay = read3digits()*600-3500;
-SEGGER_RTT_printf(0,"\nTest: %d ",delay);
+SEGGER_RTT_printf(0,"\nRunning for %d mins ",(delay+3500)*0.00166666);
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 
@@ -1376,12 +1376,12 @@ int moisture_percent2 = moisture_percent1;
 int i;
 for(i=1;i<100;++i)
 {
-	OSA_TimeDelay(500);
+	OSA_TimeDelay(delay);
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
 	light_percent1 = light_percent2;
-	light_percent2 = readlight() * 0.1;
+	light_percent2 = readlight() * 0.133;
 	temp_percent1 = temp_percent2;
 	temp_percent2 = (readTemp()-14) * 6.25;
 	moisture_percent1 = moisture_percent2;
