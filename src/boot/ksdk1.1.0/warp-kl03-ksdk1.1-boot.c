@@ -1369,7 +1369,7 @@ OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 	OSA_TimeDelay(1000);
 	//drawaline_blue(20,80,5,25);
 
-int light_percent1 = readlight() * 0.143;
+int light_percent1 = readlight() * 0.2;
 int light_percent2 = light_percent1;
 int temp_percent1 = (readTemp()-14) * 6.25;
 int temp_percent2 = temp_percent1;
