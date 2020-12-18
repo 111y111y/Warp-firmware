@@ -1352,6 +1352,10 @@ main(void)
 #endif
 //Coursework 5
 
+int delay = 0;
+SEGGER_RTT_printf(0,"\nTest: %x ",delay);
+
+
 
 //Make the screen turn on
 	devSSD1331init();
