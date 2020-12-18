@@ -1357,7 +1357,8 @@ main(void)
 	devSSD1331init();
 	OSA_TimeDelay(1000);
 	//drawaline_blue(20,80,5,25);
-int delay = 0;
+int delay =0;
+
 int light_percent1 = readlight() * 0.143;
 int light_percent2 = light_percent1;
 int temp_percent1 = (readTemp()-14) * 6.25;
@@ -1371,7 +1372,7 @@ int i;
 for(i=1;i<100;++i)
 {
 	OSA_TimeDelay(1000);
-	SEGGER_RTT_printf(0,"Test",0);
+	SEGGER_RTT_WriteString(0,"\nTest: ");
 	drawaline_yellow(i,i+1,light_percent1,light_percent2);
 	drawaline_red(i,i+1,temp_percent1,temp_percent2);
 	drawaline_blue(i,i+1,moisture_percent1,moisture_percent2);
@@ -1382,6 +1383,85 @@ for(i=1;i<100;++i)
 	moisture_percent1 = moisture_percent2;
 	moisture_percent2 = (readMoisture()-320)*0.1429;
 	}
+
+
+	while (1)
+	{
+	/*	
+	while (1){
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) voltage_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Voltage Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000);
+	}
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) calibration_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Calibration Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000)	;
+	}
+	status = I2C_DRV_MasterReceiveDataBlocking(0,
+							&slave,
+							(uint8_t *) current_register,
+							1,
+							(uint8_t *)i2c_buffer,
+							2,
+							gWarpI2cTimeoutMilliseconds);
+
+	
+	OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+
+	if (status != kStatus_I2C_Success){
+		SEGGER_RTT_WriteString(0, "Failed to read from INA219 :( \n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+	} else {
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_printf(0, "Current Register value: 0x%02x%02x\n", i2c_buffer[0], i2c_buffer[1]);
+	OSA_TimeDelay(1000)	;
+	}
+	}
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
