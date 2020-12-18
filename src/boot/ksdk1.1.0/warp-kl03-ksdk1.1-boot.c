@@ -1366,7 +1366,7 @@ int moisture_percent1 = (readMoisture()-320)*0.1429;
 int moisture_percent2 = moisture_percent1;
 SEGGER_RTT_WriteString(0,"Please input time required (4 digits): ");
 int delay = (read4digits()*600)-3500;
-
+SEGGER_RTT_printf(0,"\nTest %x",delay);
 int i;
 for(i=1;i<100;++i)
 {
