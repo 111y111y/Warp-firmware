@@ -79,7 +79,6 @@ int readMoisture(void)
 			moisture = i2c_buffer[0] << 8;
 			moisture |= i2c_buffer[1];
 			total += moisture;
-			//SEGGER_RTT_printf(0, "\nMoisture reading > %d ", moisture);
 
 		}
 	}
