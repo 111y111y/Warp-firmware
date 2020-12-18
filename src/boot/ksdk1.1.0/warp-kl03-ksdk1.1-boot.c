@@ -1355,7 +1355,7 @@ main(void)
 int delay = 0;
 SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (4 digits): ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-delay = read3digits();
+delay = read4digits();
 //SEGGER_RTT_printf(0,"\nTest: %x ",delay);
 
 
