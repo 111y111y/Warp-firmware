@@ -1391,7 +1391,7 @@ for(i=1;i<100;++i)
 	moisture_percent1 = moisture_percent2;
 	moisture_percent2 = (readMoisture()-320)*0.1429;
 	SEGGER_RTT_printf(0,"\nCycle: %d ",i);
-	OSA_TimeDelay(delay);
+	OSA_TimeDelay(86500);
 	}
 
 
