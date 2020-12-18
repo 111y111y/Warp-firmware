@@ -1353,10 +1353,13 @@ main(void)
 //Coursework 5
 
 int delay = 0;
+int user_input = 0;
 SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (3 digits, min 006): ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-delay = read3digits()*600-3500;
-SEGGER_RTT_printf(0,"\nRunning for %d mins ",(delay+3500)*0.00166666);
+user_input = read3digits();
+delay = user_input*600 - 3500;
+SEGGER_RTT_printf(0,"\nRunning for %d mins ",user_input);
+SEGGER_RTT_printf(0,"\nDelay = %d ",delay);
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 
