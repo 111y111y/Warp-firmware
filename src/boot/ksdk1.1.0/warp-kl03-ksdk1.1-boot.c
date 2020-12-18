@@ -1490,6 +1490,7 @@ for(i=1;i<100;++i)
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 
 #ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
+		/*
 		SEGGER_RTT_printf(0, "\r\tSupply=%dmV,\tDefault Target Read Register=0x%02x\n",
 								menuSupplyVoltage, menuRegisterAddress);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
@@ -1509,6 +1510,7 @@ for(i=1;i<100;++i)
 
 		SEGGER_RTT_printf(0, "\r\t%ds in RTC Handler to-date,\t%d Pmgr Errors\n", gWarpSleeptimeSeconds, powerManagerCallbackStructure.errorCount);
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		*/
 #else
 		SEGGER_RTT_WriteString(0, "\r\n\n\t\tWARNING: SEGGER_RTT_printf disabled in this firmware build.\n\t\tOnly showing output that does not require value formatting.\n\n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
