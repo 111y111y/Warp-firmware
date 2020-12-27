@@ -1356,7 +1356,7 @@ uint32_t delay = 0;
 int user_input = 0;
 SEGGER_RTT_WriteString(0,"\nEnter number of minutes to run for (3 digits, min 006): ");
 OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
-user_input = read3digits();
+user_input = read3digits(); //Own function
 delay = user_input*600 - 3500;
 SEGGER_RTT_printf(0,"\nRunning for %d mins ",user_input);
 SEGGER_RTT_printf(0,"\nDelay = %d ",delay);
